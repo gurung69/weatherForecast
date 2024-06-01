@@ -1,5 +1,7 @@
 import './App.css';
 import { useState, useEffect } from 'react';
+import SearchBar from './Components/SearchBar';
+import CurrentWeather from './Components/CurrentWeather';
 
 function App() {
   const weather_url = process.env.REACT_APP_WEATHER_URL;
@@ -7,6 +9,7 @@ function App() {
 
   const [coords, setCoords] = useState(null);
   const [currentData, setCurrentData] = useState(null);
+  const [city, setCity] = useState("");
 
   function getCurrentWeather(){
     const [lat, lon] = coords;
@@ -38,6 +41,12 @@ function App() {
 
   return (
     <div className="App">
+      <SearchBar city={city} updateCity={setCity}/>
+      {currentData == null?
+      <p>Loading...</p>:
+      <>
+        <CurrentWeather data={currentData}/>
+      </>}
     </div>
   );
 }
