@@ -1,0 +1,41 @@
+*{
+    box-sizing: border-box;
+}
+
+.search{
+    width: 35vw;
+    height: 35px;
+    font-size: 19px;
+    border: 1px solid;
+    border-radius: 15px;
+    padding-left: 35px;
+}
+
+.search-bar{
+    display: flex;
+    justify-content: center;
+    padding: 25px;
+}
+
+.current-info-container{
+    display: flex;
+    text-align: center;
+    border: 1px solid;
+    width: 75vw;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.current-info-left, .current-info-right{
+    flex-grow: 1;
+}
+
+
+.temp, .current-weather-condition, .location{
+    font-size: 25px;
+}
+
+.bold{
+    font-weight: bold;
+    font-size: 35px;
+}
