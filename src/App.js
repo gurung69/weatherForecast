@@ -38,7 +38,11 @@ function App() {
   function getWeatherByCity(){
     // get current weather data
     fetch(`${weather_url}?q=${city}&appid=${api_key}&units=metric`)
-    .then(response=>response.json())
+    .then(response=>{
+      if (response.ok) return response.json();
+      document.getElementsByClassName('error')[0].style.visibility = 'visible';
+      
+    })
     .then(data => {
       setCurrentData(data);
       console.log(data);
@@ -46,7 +50,10 @@ function App() {
 
     // get hourly forecast
     fetch(`${weather_forecast_url}?q=${city}&appid=${api_key}&units=metric`)
-    .then(response=>response.json())
+    .then(response=>
+      {
+        if (response.ok) return response.json();
+      })
     .then(data=>{
       setHourlyData(data);
       console.log(data);
@@ -74,12 +81,17 @@ function App() {
   return (
     <div className="App">
       <SearchBar city={city} updateCity={setCity} getWeather={getWeatherByCity}/>
-      {currentData == null || hourlyData == null?
-      <p>Loading...</p>:
-      <>
-        <CurrentWeather data={currentData}/>
-        <HourlyWeather hourlyData={hourlyData}/>
-      </>}
+      <div className='weather-container'>
+        {currentData == null || hourlyData == null?
+        <>
+          <p className='loading'>Loading...</p>
+        </>:
+        <>
+          <CurrentWeather data={currentData}/>
+          <HourlyWeather hourlyData={hourlyData}/>
+        </>}
+      </div>
+      <p className='error'>Cannot find location</p>
       
     </div>
   );

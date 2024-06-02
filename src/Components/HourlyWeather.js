@@ -1,5 +1,4 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -23,6 +22,8 @@ import {
   );
 
   export default function HourlyWeather({hourlyData}){
+    const iconUrl = process.env.REACT_APP_ICON_URL
+
     function getTime(unixTime){
         const d = new Date(unixTime * 1000);
         let AmOrPm = "AM"; 
@@ -54,6 +55,16 @@ import {
             }
         ]
         };
+
+        var weatherCondtions = hourlyData.list.map((data, index)=>{
+            return (
+                <div className="hourly-condition" key={index}>
+                    <img src={`${iconUrl}\\${data.weather[0].icon}@2x.png`}></img>
+                    <p className="temp"><span className="bold">{Math.floor(data.main.temp)}</span> °C</p>
+                    <p className="time">{getTime(data.dt)}</p>
+                </div>
+            )
+        })
     }
 
     const options = {
@@ -76,9 +87,16 @@ import {
       };
 
     return (
-        <div className='chart-container'>
-          <Line data={data} options={options}/>
-        </div>
+        <>
+            <div className='chart-container'>
+                <Line data={data} options={options}/>
+            </div>
+            <div className="hourly-condition-container">
+                {weatherCondtions}
+            </div>
+            
+        </>
+        
     )
 
     

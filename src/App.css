@@ -43,4 +43,36 @@
 .chart-container{
     width: 75vw;
     margin: 30px auto 0;
+    
+}
+
+.hourly-condition-container{
+    display: flex;
+    scroll-behavior: smooth;
+    overflow-x: scroll;
+    white-space: nowrap;
+    width: 75vw;
+    margin: 30px auto;
+    border: 1px solid;
+}
+
+.hourly-condition{
+    display: inline-block;
+    margin-right: 10px;
+    text-align: center;
+    position: relative;
+    padding: 0 10px;
+}
+
+.hourly-condition:not(:last-child)::after{
+    content: '';
+    position: absolute;
+    right: -5px; /* Adjust this value as needed */
+    top: 0;
+    height: 100%;
+    border-right: 1px solid #ccc;
+}
+
+.error{
+    visibility: hidden;
 }
