@@ -39,3 +39,8 @@
     font-weight: bold;
     font-size: 35px;
 }
+
+.chart-container{
+    width: 75vw;
+    margin: 30px auto 0;
+}
